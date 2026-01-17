@@ -1,25 +1,41 @@
-const EXPRESSO = '//div[@data-test="Espresso"]' 
-const EXPRESSO_MACCHIATO = '//div[@data-test="Espresso_Macchiato"]'
+const ESPRESSO = '//div[@data-test="Espresso"]' 
+const ESPRESSO_MACCHIATO = '//div[@data-test="Espresso_Macchiato"]'
 const CAPUCCINO = '//div[@data-test="Cappuccino"]'
-const MOCHA = '[data-cy="Mocha"]' // converter xpath
-const FLAT_WHITE = '[data-cy="Flat-White"]' // converter xpath
-const AMERICANO = '[data-cy="Americano"]' // converter xpath
-const CAFE_LATTE = '[data-cy="Cafe-Latte"]' // converter xpath
-const ESPRESSO_CON_PANNA = '[data-cy="Espresso-Con Panna"]' // converter xpath
-const CAFE_BREVE = '[data-cy="Cafe-Breve"]' // converter xpath
-const ACEITAR_MOCHA_PROMOCIONAL = '//button[text()="Yes, of course!"]'
+const MOCHA = '//div[@data-test="Mocha"]'
+const FLAT_WHITE = '//div[@data-test="Flat_White"]'
+const AMERICANO = '//div[@data-test="Americano"]'
+const CAFE_LATTE = '//div[@data-test="Cafe_Latte"]'
+const ESPRESSO_CON_PANNA = '//div[@data-test="Espresso_Con Panna"]'
+const CAFE_BREVE = '//div[@data-test="Cafe_Breve"]'
+const MOCHA_PROMOCIONAL = '//button[text()="Yes, of course!"]'
 
-class EscolherCafes {
+const CATALOGO_DE_CAFES = 
+        [
+        ESPRESSO, 
+        ESPRESSO_MACCHIATO, 
+        CAPUCCINO, 
+        MOCHA, 
+        FLAT_WHITE, 
+        AMERICANO, 
+        CAFE_LATTE, 
+        ESPRESSO_CON_PANNA, 
+        CAFE_BREVE
+        ]
 
-    selecionar3cafes() {
-        cy.xpath(EXPRESSO).should('be.visible').click()
-        cy.xpath(EXPRESSO_MACCHIATO).should('be.visible').wait(500).click()
-        cy.xpath(CAPUCCINO).should('be.visible').wait(500).click()
+class MenuDeEscolhas{
+    
+    seletorDeCafe(){
+        const SELECAO_DINAMICA = Cypress._.sampleSize(CATALOGO_DE_CAFES, 3);
+
+        SELECAO_DINAMICA.forEach((cafe) => {
+        cy.xpath(cafe).click()
+        }) 
     }
 
-    aceitarCafePromocional() {
-        cy.xpath(ACEITAR_MOCHA_PROMOCIONAL).wait(500).click()
+    aceitarCafePromocional(){
+
+        cy.xpath(MOCHA_PROMOCIONAL).click()
     }
 }
 
-export default new EscolherCafes
+export default new MenuDeEscolhas
