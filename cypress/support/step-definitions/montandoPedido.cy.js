@@ -1,14 +1,14 @@
 import { Given, When, And, Then, Before, After } from 'cypress-cucumber-preprocessor/steps'
 import AlterarJanela from '../pages/acessarCarrinho.page'
-import EscolherCafes from '../pages/adicionarCafesNoCarrinho.page'
+import MenuDeEscolhas from '../pages/adicionarCafesNoCarrinho.page'
 import PreencherFormulario from '../pages/inserirCredenciaisDoUsuario.page'
 
 And('que o usuario adicionou 3 sabores diferentes de cafe ao carrinho', () => {
-    EscolherCafes.selecionar3cafes()
+    MenuDeEscolhas.seletorDeCafe()
 })
 
 And('que o usuario aceitou adicionar um quarto cafe com desconto', () => {
-    EscolherCafes.aceitarCafePromocional()
+    MenuDeEscolhas.aceitarCafePromocional()
 })
 
 And('que o usuario acessa o carrinho', () => {
@@ -24,7 +24,7 @@ When('o usuario clicar no botao que exibe o preco total do pedido', () => {
 })
 
 And('o usuario preencher os campos de email e nome com suas credencias e confirmar o envio', () => {
-    PreencherFormulario.preencherCredenciais()
+    PreencherFormulario.preencherFormularioCompleto()
 })
 
 // Hook atualizado para sobrescrever o arquivo anterior
