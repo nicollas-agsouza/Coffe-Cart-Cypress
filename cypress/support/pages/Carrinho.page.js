@@ -2,21 +2,21 @@ const CARRINHO = '//a[@href="/cart"]'
 const CONFIRMAR_COMPRA = '//button[@data-test="checkout"]'
 const BTN_DELETAR = '//button[@class="delete"]'
 
-class AlterarJanela {
+class Carrinho {
 
-    trocarParaCarrinho() {
+    acessarCarrinho() {
         
         cy.xpath(CARRINHO).should('be.visible').click()
         cy.url().should('include', '/cart')
     }
 
-    validarCarrinhoCompleto() {
+    validarQuantidadeDeItens() {
 
     cy.xpath('(//ul//li[@class="list-item"])[position() > 4]')
         .should('be.visible') 
         .should('have.length', 4)
         .each(($el, index) => {
-            cy.log(`Item visível ${index + 1} confirmado.`);
+            // cy.log(`Item visível ${index + 1} confirmado.`);
         });
 }
     validarProdutos() {
@@ -33,17 +33,17 @@ class AlterarJanela {
                 const precoLimpo = rawPreco.split(' x')[0].trim();
 
                 if (!nomeLimpo || !precoLimpo.includes('$')) {
-                    cy.log(` [Index ${index}] Ignorado: "${nomeLimpo}" | "${precoLimpo}"`);
-                    return; 
+                    // cy.log(` [Index ${index}] Ignorado: "${nomeLimpo}" | "${precoLimpo}"`);
+                    // return; 
                 }
 
-                cy.log(` Conferindo: [${nomeLimpo}] por [${precoLimpo}]`);
+                // cy.log(` Conferindo: [${nomeLimpo}] por [${precoLimpo}]`);
 
                 const itemMatch = listaEsperada.find(i => i.nome === nomeLimpo && i.preco === precoLimpo);
 
                 if (!itemMatch) {
-                    cy.log(` ERRO: Item não encontrado no gabarito!`);
-                    cy.log(`   Tela: ${nomeLimpo} | ${precoLimpo}`);
+                    // cy.log(` ERRO: Item não encontrado no gabarito!`);
+                    // cy.log(`   Tela: ${nomeLimpo} | ${precoLimpo}`);
                 }
 
                 expect(itemMatch, `O item ${nomeLimpo} (${precoLimpo}) deve estar no carrinho`).to.not.be.undefined;
@@ -58,7 +58,7 @@ class AlterarJanela {
             
             cy.xpath(BTN_DELETAR).eq(NUM).click();
             cy.xpath(BTN_DELETAR).should('have.length', quantidadeAntes - 1);
-            cy.log('✅ Um item removido com sucesso.');
+            // cy.log('✅ Um item removido com sucesso.');
         });
     }
 
@@ -69,12 +69,12 @@ class AlterarJanela {
     }
 
     operacoesDoCarrinho() {
-        this.trocarParaCarrinho()
-        this.validarCarrinhoCompleto()
+        this.acessarCarrinho()
+        this.validarQuantidadeDeItens()
         this.validarProdutos()
         this.deletarCafe()
         this.acessarJanelaDeCompra()
     }
 }
 
-export default new AlterarJanela();
+export default new Carrinho();
