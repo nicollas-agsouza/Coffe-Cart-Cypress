@@ -13,24 +13,24 @@ class PreencherFormulario {
 
     marcarCheckBox() {
         if (Math.random() < 0.5) {
-            cy.xpath(CHECKBOX).should('be.visible').click().should('be.checked')
+            cy.xpath(CHECKBOX).should('be.visible').click().should('be.checked');
         } else {
-            cy.xpath(CHECKBOX).should('be.visible').should('not.be.checked')
+            cy.xpath(CHECKBOX).should('be.visible').should('not.be.checked');
         }
     }
 
     apertarBotaoSubmit() {
-        cy.xpath(BOTAO_SUBMIT).should('be.visible').click()
+        cy.xpath(BOTAO_SUBMIT).should('be.visible').click();
     }
 
     validarMensagemFinal() {
-        cy.xpath(MENSAGEM_SUCESSO).should('be.visible').and('contain', 'Please check your email for payment')
+        cy.xpath(MENSAGEM_SUCESSO).should('be.visible').and('contain', 'Please check your email for payment');
     }
 
     preencherFormularioCompleto() {
-        this.preencherCredenciais()
-        this.marcarCheckBox()
-        this.apertarBotaoSubmit()
+        this.preencherCredenciais();
+        this.marcarCheckBox();
+        this.apertarBotaoSubmit();
     }
 }
 
