@@ -14,7 +14,7 @@ class Carrinho {
 
     cy.xpath('(//ul//li[@class="list-item"])[position() > 4]')
         .should('be.visible') 
-        .should('have.length', 4)
+        .and('have.length', 4)
         .each(($el, index) => {
             // cy.log(`Item visível ${index + 1} confirmado.`);
         });
