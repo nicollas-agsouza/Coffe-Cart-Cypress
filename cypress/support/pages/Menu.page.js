@@ -76,8 +76,8 @@ class MenuDeEscolhas {
             cy.log('A lista está vazia. Nada para deletar.');
             return; 
         }
-        cy.get('[data-test="checkout"]').realHover();
-        cy.get('button[aria-label^="Remove one"]').should('have.length.greaterThan', 0).then(($buttons) => {
+        cy.get('[data-test="checkout"]').should('be.visible');
+        cy.get('button[aria-label^="Remove one"]').should('be.visible', 0).then(($buttons) => {
             
             const totalDeBotoes = $buttons.length;
             const randomIndex = Math.floor(Math.random() * totalDeBotoes);
@@ -96,7 +96,7 @@ class MenuDeEscolhas {
             const removerdCoffeeName = ariaText.replace('Remove one', '').trim();
 
             cy.log(`Removendo: "${removerdCoffeeName}"`);
-            cy.wrap(botaoAlvo).click({ force: true });
+            cy.wrap(botaoAlvo).click();
             cy.get('[data-test="checkout"]').realHover();
             });
         });
