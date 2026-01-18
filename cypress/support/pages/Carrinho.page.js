@@ -1,28 +1,23 @@
 const CARRINHO = '//a[@href="/cart"]'
 const CONFIRMAR_COMPRA = '//button[@data-test="checkout"]'
 const BTN_DELETAR = '//button[@class="delete"]'
+const QUANTIDADE_ITENS = '(//ul//li[@class="list-item"])[position() > 4]'
 
 class Carrinho {
 
     acessarCarrinho() {
-        
-        cy.xpath(CARRINHO).should('be.visible').click()
-        cy.url().should('include', '/cart')
+        cy.xpath(CARRINHO).should('be.visible').click();
+        cy.url().should('include', '/cart');
     }
 
     validarQuantidadeDeItens() {
+        cy.xpath(QUANTIDADE_ITENS).should('be.visible').and('have.length', 4);
+    }
 
-    cy.xpath('(//ul//li[@class="list-item"])[position() > 4]')
-        .should('be.visible') 
-        .and('have.length', 4)
-        .each(($el, index) => {
-            // cy.log(`Item visível ${index + 1} confirmado.`);
-        });
-}
     validarProdutos() {
-    cy.get('@listaEsperada').then((listaEsperada) => {
+    cy.get('@itensSelecionados').then((itensSelecionados) => {
 
-        cy.xpath('(//ul//li[@class="list-item"])[position() > 4]')
+        cy.xpath(QUANTIDADE_ITENS)
             .should('be.visible')
             .each(($el, index) => {
 
@@ -32,24 +27,12 @@ class Carrinho {
                 const nomeLimpo = rawNome.split(' x')[0].trim();
                 const precoLimpo = rawPreco.split(' x')[0].trim();
 
-                if (!nomeLimpo || !precoLimpo.includes('$')) {
-                    // cy.log(` [Index ${index}] Ignorado: "${nomeLimpo}" | "${precoLimpo}"`);
-                    // return; 
-                }
-
-                // cy.log(` Conferindo: [${nomeLimpo}] por [${precoLimpo}]`);
-
-                const itemMatch = listaEsperada.find(i => i.nome === nomeLimpo && i.preco === precoLimpo);
-
-                if (!itemMatch) {
-                    // cy.log(` ERRO: Item não encontrado no gabarito!`);
-                    // cy.log(`   Tela: ${nomeLimpo} | ${precoLimpo}`);
-                }
+                const itemMatch = itensSelecionados.find(i => i.nome === nomeLimpo && i.preco === precoLimpo);
 
                 expect(itemMatch, `O item ${nomeLimpo} (${precoLimpo}) deve estar no carrinho`).to.not.be.undefined;
             });
-    });
-}
+        });
+    }
 
     deletarCafe() {
         cy.xpath(BTN_DELETAR).then((elementos) => {
@@ -58,22 +41,19 @@ class Carrinho {
             
             cy.xpath(BTN_DELETAR).eq(NUM).click();
             cy.xpath(BTN_DELETAR).should('have.length', quantidadeAntes - 1);
-            // cy.log('✅ Um item removido com sucesso.');
+            cy.log('1 item removido com sucesso.');
         });
     }
 
-    acessarJanelaDeCompra() {
-        cy.xpath(CONFIRMAR_COMPRA)
-            .should('be.visible').and('not.be.disabled').click()
-            
+    acessarCheckout() {
+        cy.xpath(CONFIRMAR_COMPRA).should('be.visible').and('not.be.disabled').click();   
     }
 
     operacoesDoCarrinho() {
-        this.acessarCarrinho()
-        this.validarQuantidadeDeItens()
-        this.validarProdutos()
-        this.deletarCafe()
-        this.acessarJanelaDeCompra()
+        this.acessarCarrinho();
+        this.validarQuantidadeDeItens();
+        this.validarProdutos();
+        this.deletarCafe();
     }
 }
 
