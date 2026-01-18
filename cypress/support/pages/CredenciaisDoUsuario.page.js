@@ -23,7 +23,7 @@ class PreencherFormulario {
         cy.xpath(BOTAO_SUBMIT).should('be.visible').click()
     }
 
-    validarCompra() {
+    validarMensagemFinal() {
         cy.xpath(MENSAGEM_SUCESSO).should('be.visible').and('contain', 'Please check your email for payment')
     }
 

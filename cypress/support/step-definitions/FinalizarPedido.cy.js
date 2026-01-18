@@ -1,5 +1,5 @@
 import { Given, When, And, Then, Before, After, But } from 'cypress-cucumber-preprocessor/steps'
-import AlterarJanela from '../pages/Carrinho.page'
+import Carrinho from '../pages/Carrinho.page'
 import MenuDeEscolhas from '../pages/EscolherCafe.page'
 import PreencherFormulario from '../pages/CredenciaisDoUsuario.page'
 
@@ -12,7 +12,7 @@ And('que o usuario adiciona ao carrinho 3 tipos diferentes de café mais um caf�
 })
 
 But('o usuario remove um item aleatório antes de finalizar a compra', () => {
-    AlterarJanela.operacoesDoCarrinho()
+    Carrinho.operacoesDoCarrinho()
 })
 
 When('o usuario segue para o checkout para inserir suas credenciais e confirma o envio', () => {
@@ -20,7 +20,7 @@ When('o usuario segue para o checkout para inserir suas credenciais e confirma o
 })
 
 Then('deve ser exibida na tela a mensagem "Thanks for your purchase. Please check your email for payment."', () => {
-    PreencherFormulario.validarCompra()
+    PreencherFormulario.validarMensagemFinal()
 })
 
 After(() => {

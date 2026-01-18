@@ -23,7 +23,7 @@ class MenuDeEscolhas {
         const CAFES_ESCOLHIDOS = Cypress._.sampleSize(CATALOGO, 3);
 
         CAFES_ESCOLHIDOS.forEach((item) => {
-            cy.xpath(item.xpath).should('be.visible').click();
+            cy.xpath(item.xpath).should('be.visible').realHover().realClick();
             this.listaParaValidacao.push({ nome: item.nome, preco: item.preco });
         });
     }
