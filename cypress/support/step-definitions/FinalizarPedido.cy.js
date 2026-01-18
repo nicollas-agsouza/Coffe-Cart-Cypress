@@ -33,5 +33,5 @@ Then('deve ser exibida na tela a mensagem "Thanks for your purchase. Please chec
 })
 
 After(() => {
-    cy.screenshot('Evidência_do_Sucesso_01', { overwrite: true })
+    cy.screenshot('Validação_finalizar_Pedido', {overwrite: true})
 })

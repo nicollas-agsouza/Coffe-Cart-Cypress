@@ -13,7 +13,7 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
+// Import commands.js using ES2015 syntax:S
 import './commands'
 require('@cypress/xpath');
 import "cypress-real-events/support";
