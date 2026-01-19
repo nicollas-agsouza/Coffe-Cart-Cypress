@@ -25,42 +25,49 @@ O ecossistema do projeto é composto por:
 * **Seletores:** Biblioteca XPath
 * **Simulação de Eventos:** Biblioteca realEvents (para interações nativas do navegador)
 
+## 📋 Pré-requisitos para Execução
 
+Para rodar este projeto localmente, você precisa garantir que sua máquina possui:
 
-## Como Executar o Projeto
+1.  **Node.js instalado:** Versão atual (LTS).
+2.  **IDE de sua preferência:** Recomendamos o Visual Studio Code (VS Code).
 
-### Pré-requisitos
-Antes de começar, você precisará ter instalado em sua máquina:
-* [Node.js](https://nodejs.org/) (versão estável).
-* Um editor de código (recomendo o VS Code).
+---
 
-### Passo a Passo
+## 🚀 Passo a Passo para Configuração e Execução
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone [https://github.com/nicollas-agsouza/Coffe-Cart-Cypress.git](https://github.com/nicollas-agsouza/Coffe-Cart-Cypress.git)
-    ```
+Siga rigorosamente as etapas abaixo para configurar o ambiente:
 
-2.  **Acesse a pasta do projeto:**
-    ```bash
-    cd Coffe-Cart-Cypress
-    ```
+### 1. Preparação dos Arquivos
+* Faça o download do arquivo **Code ZIP** do projeto.
+* Extraia o conteúdo do ZIP em uma pasta local em seu computador.
 
-3.  **Instale as dependências:**
-    ```bash
-    npm install cypress --save-dev
-    ```
+### 2. Abertura e Instalação
+* Abra o **VS Code**.
+* Vá em `Arquivo > Abrir Pasta` e selecione a pasta que você extraiu.
+* Abra o terminal integrado do VS Code e digite o comando abaixo para instalar as dependências necessárias:
+```bash
+    npm install
+```
 
-4.  **Execução dos testes:**
+### 3. Execução dos Testes
+Para abrir a interface gráfica do Cypress e rodar os testes, utilize o comando:
+```bash
+npx cypress open
+```
+Dentro da interface do Cypress, siga este fluxo:
 
-     **Para abrir a interface interativa do Cypress:**
-     ```bash
-     npx cypress open
-     ```
+1.  **Configuração:** Clique em `E2E Testing` (Configured).
+2.  **Navegador:** Selecione o navegador de sua escolha (ex: Chrome, Edge ou Electron).
+3.  **Início:** Clique no botão para iniciar o teste no navegador selecionado.
+4.  **Seleção:** Na lista de testes, procure e clique no arquivo: `efetuar pagamento`.
 
+> **Nota:** O Cypress iniciará automaticamente a execução dos passos e você poderá acompanhar o log de comandos no painel lateral esquerdo.
 
-## Estrutura do Projeto
-Para manter a organização seguindo o padrão **POM**, o projeto está estruturado da seguinte forma:
-* `cypress/e2e/`: Arquivos `.feature` (especificações em BDD).
-* `cypress/support/step_definitions/`: Implementação técnica dos passos do Cucumber.
-* `cypress/support/pages/`: Classes representando as páginas com seus respectivos elementos e métodos.
+---
+
+### 📑 Estrutura do Projeto
+
+* `cypress/e2e/`: Contém os arquivos de teste (specs).
+* `cypress/fixtures/`: Dados estáticos utilizados nos testes.
+* `cypress/support/`: Comandos personalizados e configurações globais.
