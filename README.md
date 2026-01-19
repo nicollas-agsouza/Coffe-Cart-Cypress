@@ -19,8 +19,9 @@ A automação cobre o fluxo completo de compra no site [Coffee Cart](https://cof
 
 ## Tecnologias Utilizadas
 O ecossistema do projeto é composto por:
-* **Linguagem:** Javascript
 * **Framework de Teste:** Cypress
+* **Ambiente de Execução:** Node.js
+* **Controle de Versão:** Git
 * **BDD/Gherkin:** Cucumber
 * **Seletores:** Biblioteca XPath
 * **Simulação de Eventos:** Biblioteca realEvents (para interações nativas do navegador)
@@ -32,22 +33,31 @@ Para rodar este projeto localmente, você precisa garantir que sua máquina poss
 1.  **Node.js instalado:** Versão atual (LTS).
 2.  **IDE de sua preferência:** Recomendamos o Visual Studio Code (VS Code).
 
+
 ---
 
-## 🚀 Passo a Passo para Configuração e Execução
+## Passo a Passo para Configuração e Execução
 
 Siga rigorosamente as etapas abaixo para configurar o ambiente:
 
 ### 1. Preparação dos Arquivos
 * Faça o download do arquivo **Code ZIP** do projeto.
 * Extraia o conteúdo do ZIP em uma pasta local em seu computador.
+* **Configuração de Variáveis:** Na raiz do projeto (mesma pasta onde está o arquivo `package.json`), crie um novo arquivo chamado `cypress.env.json` e adicione o seguinte conteúdo:
+
+```json
+ {
+    "email": "qualquerValor@email.com",
+    "nome": "qualquerNome"
+ }
+```
 
 ### 2. Abertura e Instalação
 * Abra o **VS Code**.
 * Vá em `Arquivo > Abrir Pasta` e selecione a pasta que você extraiu.
 * Abra o terminal integrado do VS Code e digite o comando abaixo para instalar as dependências necessárias:
 ```bash
-    npm install
+npm install
 ```
 
 ### 3. Execução dos Testes
@@ -60,9 +70,25 @@ Dentro da interface do Cypress, siga este fluxo:
 1.  **Configuração:** Clique em `E2E Testing` (Configured).
 2.  **Navegador:** Selecione o navegador de sua escolha (ex: Chrome, Edge ou Electron).
 3.  **Início:** Clique no botão para iniciar o teste no navegador selecionado.
-4.  **Seleção:** Na lista de testes, procure e clique no arquivo: `efetuar pagamento`.
+4.  **Seleção:** Na lista de testes, procure e clique no arquivo: `efetuar-compra`.
 
 > **Nota:** O Cypress iniciará automaticamente a execução dos passos e você poderá acompanhar o log de comandos no painel lateral esquerdo.
+
+### 🎯 O que a automação executa?
+O projeto testa a funcionalidade de **efetuar pagamento** através de dois cenários principais, garantindo que o usuário consiga concluir a compra por diferentes caminhos do site:
+
+1.  **Checkout via Home:** Finalização do pedido diretamente na página inicial.
+2.  **Checkout via Carrinho:** Fluxo completo de navegação e finalização na página dedicada do carrinho.
+
+### Requisitos Validados
+Durante a execução, os seguintes passos são realizados e validados:
+
+* **Acesso:** Navegação segura até a URL oficial do projeto.
+* **Seleção:** Escolha estratégica de 3 tipos de cafés diferentes.
+* **Promoção:** Detecção e validação do modal de oferta (Mocha por $4) e aceitação da oferta.
+* **Carrinho:** Verificação se os 4 itens (3 iniciais + 1 oferta) estão presentes com os cálculos de valores corretos.
+* **Edição:** Teste de remoção de 1 item para validar a atualização do carrinho.
+* **Checkout:** Preenchimento dos dados de pagamento e validação da mensagem de sucesso final.
 
 ---
 
